@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gender Reveal Invitation</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-image: url('bg.avif');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        .script-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4em;
+            color: #333;
+            margin: 20px 0;
+        }
+
+        .heart {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background-color: #fddde6;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 10px;
+        }
+
+        .heart::before, .heart::after {
+            content: "";
+            position: absolute;
+            top: -20px;
+            width: 30px;
+            height: 60px;
+            background-color: #fddde6;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .heart::before {
+            left: 0;
+            transform: rotate(-45deg);
+        }
+
+        .heart::after {
+            right: 0;
+            transform: rotate(45deg);
+        }
+
+        h2 {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+
+        h3 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: normal;
+        }
+
+        .details {
+            font-size: 1em;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #e91e63;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #ad1457;
+        }
+
+        #game-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        #game-container button {
+            margin-top: 10px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container" id="invite-container">
+        <h1>WHAT WILL SANTOSH AND PRADNYA'S<br>SWEET LITTLE BABY BE?</h1>
+        <div class="script-text">
+            boy <span class="heart"></span> girl
+        </div>
+        <h2>COME FIND OUT WITH US AT THEIR</h2>
+        <h3>GENDER REVEAL</h3>
+        <div class="details">
+            <p>Saturday, December Fifteenth</p>
+            <p>UNIT 806, 160 GREAT WESTERN HIGHWAY</p>
+            <p>WESTMEAD</p>
+            <p>FROM 11AM - 3PM</p>
+            <p>Lunch and drinks will be served. Please wear your guess in pink or blue</p>
+        </div>
+        <a href="#" class="btn" id="rsvp-btn">RSVP</a>
+        <a href="#" class="btn" id="game-button">Game</a>
+    </div>
+
+    <div id="game-container">
+        <div id="game-content"></div>
+        <button id="exit-game" class="btn">Exit Game</button>
+    </div>
+
+
+    <script>
+        const gameButton = document.getElementById('game-button');
+        const gameContainer = document.getElementById('game-container');
+        const gameContent = document.getElementById('game-content');
+        const exitGameButton = document.getElementById('exit-game');
+        const inviteContainer = document.getElementById('invite-container');
+
+        gameButton.addEventListener('click', () => {
+            generateRandomGame();
+            gameContainer.style.display = 'block';
+            inviteContainer.style.display = 'none';
+        });
+
+        exitGameButton.addEventListener('click', () => {
+            gameContainer.style.display = 'none';
+            inviteContainer.style.display = 'block';
+        });
+
+function generateRandomGame() {
+    const questions = [
+        { question: "Is blue for boys?", answer: "yes" },
+        { question: "Is pink for girls?", answer: "yes" },
+        { question: "Are grandparents happy for a new baby?", answer: "yes" },
+        { question: "Is 'beta' a son?", answer: "yes" },
+        { question: "Is 'beti' a daughter?", answer: "yes" },
+        { question: "Are toy cars for boys?", answer: "yes" },
+        { question: "Are dolls for girls?", answer: "yes" },
+        { question: "Is 'pita' a father?", answer: "yes" },
+        { question: "Is 'ashirwad' a blessing?", answer: "yes" },
+        { question: "Is 'annaprashan' a baby's first food celebration?", answer: "yes" },
+        { question: "Do boys play with trucks?", answer: "yes" },
+        { question: "Do girls play with tea sets?", answer: "yes" },
+        { question: "Is 'nani' a grandmother?", answer: "yes" },
+        { question: "Is 'dada' a grandfather?", answer: "yes" },
+        { question: "Are babies wrapped in blankets?", answer: "yes" },
+        { question: "Do babies drink milk?", answer: "yes" },
+        { question: "Is a rattle a baby toy?", answer: "yes" },
+        { question: "Is 'kajal' used on baby's eyes?", answer: "yes" },
+        { question: "Is 'rakhi' for brothers and sisters?", answer: "yes" },
+        { question: "Is 'krishna' a god associated with children?", answer: "yes" },
+        { question: "Is 'garbhvati' a pregnant woman?", answer: "yes"},
+        { question: "Is 'nakshatra' related to baby naming?", answer: "yes"},
+        { question: "Is 'rakshabandhan' a festival?", answer: "yes"},
+        { question: "Is 'peda' a sweet?", answer: "yes"},
+        { question: "Is 'barfi' a sweet?", answer: "yes"}
+    ];
+
+    let selectedQuestions = [];
+    let score = 0;
+    let questionIndex = 0;
+
+    // Select 5 random questions
+    while (selectedQuestions.length < 5) {
+        const randomIndex = Math.floor(Math.random() * questions.length);
+        if (!selectedQuestions.includes(questions[randomIndex])) {
+            selectedQuestions.push(questions[randomIndex]);
+        }
+    }
+
+    function displayQuestion() {
+        if (questionIndex < 5) {
+            const currentQuestion = selectedQuestions[questionIndex];
+
+            gameContent.innerHTML = `
+                <h2>Indian Gender Quiz Time!</h2>
+                <p>${currentQuestion.question}</p>
+                <div style="margin-top: 10px;">
+                    <label><input type="radio" name="answer" value="yes"> Yes</label><br>
+                    <label><input type="radio" name="answer" value="no"> No</label>
+                </div>
+                <div style="margin-top: 10px;">
+                    <button id="answerButton" class="btn">Answer</button>
+                    <button id="nextButton" class="btn" style="display: none;">Next Question</button>
+                </div>
+                <p id="answerResult"></p>
+            `;
+
+            const answerButton = document.getElementById('answerButton');
+            const nextButton = document.getElementById('nextButton');
+            const answerResult = document.getElementById('answerResult');
+
+            answerButton.addEventListener('click', () => {
+                const selectedRadio = document.querySelector('input[name="answer"]:checked');
+                if (selectedRadio) {
+                    const answer = selectedRadio.value;
+                    if (answer === currentQuestion.answer) {
+                        answerResult.textContent = 'Correct!';
+                        score++;
+                    } else {
+                        answerResult.textContent = `Incorrect! The answer is ${currentQuestion.answer}.`;
+                    }
+                    answerButton.style.display = 'none';
+                    nextButton.style.display = 'inline-block';
+                } else {
+                    answerResult.textContent = 'Please select an answer.';
+                }
+            });
+
+            nextButton.addEventListener('click', () => {
+                questionIndex++;
+                displayQuestion();
+            });
+
+        } else {
+            const percentageScore = (score / 5) * 100;
+            gameContent.innerHTML = `
+                <h2>Quiz Completed!</h2>
+                <p>Your score: ${score} out of 5 (${percentageScore}%)</p>
+                <button id="restartButton" class="btn">Restart Quiz</button>
+            `;
+            const restartButton = document.getElementById('restartButton');
+            restartButton.addEventListener('click', () => {
+                questionIndex = 0;
+                score = 0;
+                selectedQuestions = [];
+                while (selectedQuestions.length < 5) {
+                    const randomIndex = Math.floor(Math.random() * questions.length);
+                    if (!selectedQuestions.includes(questions[randomIndex])) {
+                        selectedQuestions.push(questions[randomIndex]);
+                    }
+                }
+                displayQuestion();
+            });
+        }
+    }
+    displayQuestion();
+}
+ const rsvpButton = document.getElementById('rsvp-btn');
+
+    rsvpButton.addEventListener('click', () => {
+        // Create a custom modal/popup
+        const modal = document.createElement('div');
+        modal.style.position = 'fixed';
+        modal.style.top = '50%';
+        modal.style.left = '50%';
+        modal.style.transform = 'translate(-50%, -50%)';
+        modal.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+        modal.style.padding = '20px';
+        modal.style.borderRadius = '10px';
+        modal.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+        modal.style.zIndex = '1001'; // Higher than game-container
+        modal.style.textAlign = 'center';
+
+        const message = document.createElement('p');
+        message.textContent = "Please call +61 431933607 (Santosh) or +61 420245022 (Pradnya) to confirm your RSVP.";
+        message.style.marginBottom = '10px';
+
+        const closeButton = document.createElement('button');
+        closeButton.textContent = 'Close';
+        closeButton.className = 'btn'; // Use your existing button style
+        closeButton.addEventListener('click', () => {
+            document.body.removeChild(modal);
+        });
+
+        modal.appendChild(message);
+        modal.appendChild(closeButton);
+        document.body.appendChild(modal);
+    });
+
+</script>
+
+</body>
+</html>
