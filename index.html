@@ -14,36 +14,31 @@
             --heart-color: #fddde6;
         }
 
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-image: url('bg.avif'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-    body {
-        font-family: 'Open Sans', sans-serif;
-        background-image: url('bg.avif'); /* Replace with your image path */
-        background-size: cover;
-        background-position: center;
-        margin: 0;
-        padding: 0;
-        min-height: 100vh; /* Ensure body covers the full viewport height */
-    }
-
-    .container, #game-container {
-        position: fixed; /* Use fixed positioning for full screen */
-        top: 0;
-        left: 0;
-        width: 100%; /* Fill the entire viewport width */
-        height: 100%; /* Fill the entire viewport height */
-        background-size: cover; /* Cover the entire container with the background image */
-        background-position: center;
-        background-color: rgba(255, 255, 255, 0.7); /* Adjust as needed */
-        display: flex;
-        flex-direction: column;
-        justify-content: center; /* Center content vertically */
-        align-items: center; /* Center content horizontally */
-        padding: 20px;
-        border-radius: 0; /* Remove border radius for full screen */
-        box-shadow: none; /* Remove box shadow for full screen */
-        text-align: center;
-        z-index: 1000; /* Ensure it's above other elements */
-    }
+.container {
+    background-image: url('bg.avif'); /* Replace with your image path */
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0.7); /* Light white overlay */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+}
 
         h1 {
             font-size: 1.1em;
@@ -127,11 +122,31 @@
             background-color: var(--primary-dark-color);
         }
 
+#game-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url('bg.avif'); /* Replace with your image path */
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0.9); /* Very light white overlay */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 90%;
+    max-width: 600px; /* Match main container max-width */
+    height: auto; /* Allow height to adjust to content */
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Good readable font */
+    color: #333; /* Darker text for better contrast */
+}
 
-    #game-container {
-        background-color: rgba(255, 255, 255, 0.9); /* Very light white overlay for game */
-        display: none; /* Hide game container initially */
-    }
+#game-container h2, #game-container p {
+    color: #333; /* Ensure headings and paragraphs also have good contrast */
+}
 
         #game-container button {
             margin: 5px;
