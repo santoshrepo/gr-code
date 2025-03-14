@@ -217,7 +217,11 @@ function generateRandomGame() {
                 shapes: ['star', 'circle'],
             });
 
-            celebrationMessage.textContent = "Congratulations! You're ready for the gender reveal!";
+             if (percentageScore < 20) {
+                  celebrationMessage.textContent = "Oops! You might have missed a few. But don't worry, you're still invited to the gender reveal!";
+                } else {
+                  celebrationMessage.textContent = "Congratulations! You're ready for the gender reveal!";
+                }
         }
     }
     displayQuestion();
