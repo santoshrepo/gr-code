@@ -138,10 +138,18 @@
     z-index: 1000;
     width: 90%;
     max-width: 600px; /* Match main container max-width */
-    height: auto; /* Allow height to adjust to content */
+    height: 50%; /* Allow height to adjust to content */
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Good readable font */
     color: #333; /* Darker text for better contrast */
+}
+
+#game-content {
+    flex-grow: 1; /* Allow content to grow and fill available space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #game-container h2, #game-container p {
