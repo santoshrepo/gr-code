@@ -5,9 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gender Reveal Invitation</title>
     <style>
+        :root {
+            --primary-color: #e91e63;
+            --primary-dark-color: #ad1457;
+            --background-opacity: rgba(255, 255, 255, 0.85);
+            --text-color: #333;
+            --secondary-text-color: #555;
+            --heart-color: #fddde6;
+        }
+
         body {
             font-family: 'Open Sans', sans-serif;
-            background-image: url('bg.avif');
+            background-image: url('bg.avif'); /* Replace with your image path */
             background-size: cover;
             background-position: center;
             margin: 0;
@@ -18,47 +27,50 @@
             min-height: 100vh;
         }
 
-        .container {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 80%;
-            max-width: 600px;
-        }
+.container {
+    background-image: url('bg.avif'); /* Replace with your image path */
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0.7); /* Light white overlay */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+}
 
         h1 {
-            font-size: 1.2em;
-            color: #333;
-            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: var(--text-color);
+            margin-bottom: 10px;
             font-weight: normal;
         }
 
         .script-text {
             font-family: 'Dancing Script', cursive;
-            font-size: 4em;
-            color: #333;
-            margin: 20px 0;
+            font-size: 3em;
+            color: var(--text-color);
+            margin: 10px 0;
         }
 
         .heart {
             display: inline-block;
-            width: 60px;
-            height: 60px;
-            background-color: #fddde6;
+            width: 40px;
+            height: 40px;
+            background-color: var(--heart-color);
             border-radius: 50%;
             position: relative;
-            margin: 0 10px;
+            margin: 0 5px;
         }
 
         .heart::before, .heart::after {
             content: "";
             position: absolute;
-            top: -20px;
-            width: 30px;
-            height: 60px;
-            background-color: #fddde6;
+            top: -15px;
+            width: 20px;
+            height: 40px;
+            background-color: var(--heart-color);
             border-radius: 50% 50% 0 0;
         }
 
@@ -73,65 +85,115 @@
         }
 
         h2 {
-            font-size: 1.5em;
-            color: #333;
-            margin-bottom: 10px;
+            font-size: 1.2em;
+            color: var(--text-color);
+            margin-bottom: 5px;
             font-weight: normal;
         }
 
         h3 {
-            font-size: 2em;
-            color: #333;
-            margin-bottom: 30px;
+            font-size: 1.6em;
+            color: var(--text-color);
+            margin-bottom: 20px;
             font-weight: normal;
         }
 
         .details {
-            font-size: 1em;
-            line-height: 1.6;
-            color: #555;
-            margin-bottom: 40px;
+            font-size: 0.9em;
+            line-height: 1.4;
+            color: var(--secondary-text-color);
+            margin-bottom: 30px;
         }
 
         .btn {
             display: inline-block;
-            padding: 15px 30px;
-            background-color: #e91e63;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
             color: #fff;
             text-decoration: none;
             border-radius: 5px;
-            margin: 0 10px;
+            margin: 5px;
             transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
 
         .btn:hover {
-            background-color: #ad1457;
+            background-color: var(--primary-dark-color);
         }
 
-        #game-container {
+#game-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url('bg.avif'); /* Replace with your image path */
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0.9); /* Very light white overlay */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 90%;
+    max-width: 600px; /* Match main container max-width */
+    height: auto; /* Allow height to adjust to content */
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Good readable font */
+    color: #333; /* Darker text for better contrast */
+}
+
+#game-container h2, #game-container p {
+    color: #333; /* Ensure headings and paragraphs also have good contrast */
+}
+
+        #game-container button {
+            margin: 5px;
+        }
+
+        #rsvp-modal {
             display: none;
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.95);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            width: 80%;
-            max-width: 500px;
+            z-index: 1001;
+            text-align: center;
         }
 
-        #game-container button {
-            margin-top: 10px;
+        @media (max-width: 480px) {
+            .script-text {
+                font-size: 2.5em;
+            }
         }
+
+        #game-content.shake {
+            animation: shake 0.5s ease-in-out;
+            animation-iteration-count: 1;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            10% { transform: translateX(-5px); }
+            30% { transform: translateX(5px); }
+            50% { transform: translateX(-5px); }
+            70% { transform: translateX(5px); }
+            90% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
     <div class="container" id="invite-container">
-        <h1>WHAT WILL SANTOSH AND PRADNYA'S<br>SWEET LITTLE BABY BE?</h1>
+        <h1>WHAT WILL xxxxx AND xxxxxx's<br>SWEET LITTLE BABY BE?</h1>
         <div class="script-text">
             boy <span class="heart"></span> girl
         </div>
@@ -139,181 +201,25 @@
         <h3>GENDER REVEAL</h3>
         <div class="details">
             <p>Saturday, December Fifteenth</p>
-            <p>UNIT 806, 160 GREAT WESTERN HIGHWAY</p>
-            <p>WESTMEAD</p>
+            <p>UNIT xx, xxxxxxxxxxx</p>
+            <p>xxxxxx</p>
             <p>FROM 11AM - 3PM</p>
             <p>Lunch and drinks will be served. Please wear your guess in pink or blue</p>
         </div>
-        <a href="#" class="btn" id="rsvp-btn">RSVP</a>
-        <a href="#" class="btn" id="game-button">Game</a>
+        <button id="rsvp-btn" class="btn">RSVP</button>
+        <button id="game-button" class="btn">Game</button>
     </div>
 
     <div id="game-container">
+        <h2>Indian Gender Quiz Time!</h2>
         <div id="game-content"></div>
         <button id="exit-game" class="btn">Exit Game</button>
     </div>
 
-
-    <script>
-        const gameButton = document.getElementById('game-button');
-        const gameContainer = document.getElementById('game-container');
-        const gameContent = document.getElementById('game-content');
-        const exitGameButton = document.getElementById('exit-game');
-        const inviteContainer = document.getElementById('invite-container');
-
-        gameButton.addEventListener('click', () => {
-            generateRandomGame();
-            gameContainer.style.display = 'block';
-            inviteContainer.style.display = 'none';
-        });
-
-        exitGameButton.addEventListener('click', () => {
-            gameContainer.style.display = 'none';
-            inviteContainer.style.display = 'block';
-        });
-
-function generateRandomGame() {
-    const questions = [
-        { question: "Is blue for boys?", answer: "yes" },
-        { question: "Is pink for girls?", answer: "yes" },
-        { question: "Are grandparents happy for a new baby?", answer: "yes" },
-        { question: "Is 'beta' a son?", answer: "yes" },
-        { question: "Is 'beti' a daughter?", answer: "yes" },
-        { question: "Are toy cars for boys?", answer: "yes" },
-        { question: "Are dolls for girls?", answer: "yes" },
-        { question: "Is 'pita' a father?", answer: "yes" },
-        { question: "Is 'ashirwad' a blessing?", answer: "yes" },
-        { question: "Is 'annaprashan' a baby's first food celebration?", answer: "yes" },
-        { question: "Do boys play with trucks?", answer: "yes" },
-        { question: "Do girls play with tea sets?", answer: "yes" },
-        { question: "Is 'nani' a grandmother?", answer: "yes" },
-        { question: "Is 'dada' a grandfather?", answer: "yes" },
-        { question: "Are babies wrapped in blankets?", answer: "yes" },
-        { question: "Do babies drink milk?", answer: "yes" },
-        { question: "Is a rattle a baby toy?", answer: "yes" },
-        { question: "Is 'kajal' used on baby's eyes?", answer: "yes" },
-        { question: "Is 'rakhi' for brothers and sisters?", answer: "yes" },
-        { question: "Is 'krishna' a god associated with children?", answer: "yes" },
-        { question: "Is 'garbhvati' a pregnant woman?", answer: "yes"},
-        { question: "Is 'nakshatra' related to baby naming?", answer: "yes"},
-        { question: "Is 'rakshabandhan' a festival?", answer: "yes"},
-        { question: "Is 'peda' a sweet?", answer: "yes"},
-        { question: "Is 'barfi' a sweet?", answer: "yes"}
-    ];
-
-    let selectedQuestions = [];
-    let score = 0;
-    let questionIndex = 0;
-
-    // Select 5 random questions
-    while (selectedQuestions.length < 5) {
-        const randomIndex = Math.floor(Math.random() * questions.length);
-        if (!selectedQuestions.includes(questions[randomIndex])) {
-            selectedQuestions.push(questions[randomIndex]);
-        }
-    }
-
-    function displayQuestion() {
-        if (questionIndex < 5) {
-            const currentQuestion = selectedQuestions[questionIndex];
-
-            gameContent.innerHTML = `
-                <h2>Indian Gender Quiz Time!</h2>
-                <p>${currentQuestion.question}</p>
-                <div style="margin-top: 10px;">
-                    <label><input type="radio" name="answer" value="yes"> Yes</label><br>
-                    <label><input type="radio" name="answer" value="no"> No</label>
-                </div>
-                <div style="margin-top: 10px;">
-                    <button id="answerButton" class="btn">Answer</button>
-                    <button id="nextButton" class="btn" style="display: none;">Next Question</button>
-                </div>
-                <p id="answerResult"></p>
-            `;
-
-            const answerButton = document.getElementById('answerButton');
-            const nextButton = document.getElementById('nextButton');
-            const answerResult = document.getElementById('answerResult');
-
-            answerButton.addEventListener('click', () => {
-                const selectedRadio = document.querySelector('input[name="answer"]:checked');
-                if (selectedRadio) {
-                    const answer = selectedRadio.value;
-                    if (answer === currentQuestion.answer) {
-                        answerResult.textContent = 'Correct!';
-                        score++;
-                    } else {
-                        answerResult.textContent = `Incorrect! The answer is ${currentQuestion.answer}.`;
-                    }
-                    answerButton.style.display = 'none';
-                    nextButton.style.display = 'inline-block';
-                } else {
-                    answerResult.textContent = 'Please select an answer.';
-                }
-            });
-
-            nextButton.addEventListener('click', () => {
-                questionIndex++;
-                displayQuestion();
-            });
-
-        } else {
-            const percentageScore = (score / 5) * 100;
-            gameContent.innerHTML = `
-                <h2>Quiz Completed!</h2>
-                <p>Your score: ${score} out of 5 (${percentageScore}%)</p>
-                <button id="restartButton" class="btn">Restart Quiz</button>
-            `;
-            const restartButton = document.getElementById('restartButton');
-            restartButton.addEventListener('click', () => {
-                questionIndex = 0;
-                score = 0;
-                selectedQuestions = [];
-                while (selectedQuestions.length < 5) {
-                    const randomIndex = Math.floor(Math.random() * questions.length);
-                    if (!selectedQuestions.includes(questions[randomIndex])) {
-                        selectedQuestions.push(questions[randomIndex]);
-                    }
-                }
-                displayQuestion();
-            });
-        }
-    }
-    displayQuestion();
-}
- const rsvpButton = document.getElementById('rsvp-btn');
-
-    rsvpButton.addEventListener('click', () => {
-        // Create a custom modal/popup
-        const modal = document.createElement('div');
-        modal.style.position = 'fixed';
-        modal.style.top = '50%';
-        modal.style.left = '50%';
-        modal.style.transform = 'translate(-50%, -50%)';
-        modal.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
-        modal.style.padding = '20px';
-        modal.style.borderRadius = '10px';
-        modal.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
-        modal.style.zIndex = '1001'; // Higher than game-container
-        modal.style.textAlign = 'center';
-
-        const message = document.createElement('p');
-        message.textContent = "Please call +61 431933607 (Santosh) or +61 420245022 (Pradnya) to confirm your RSVP.";
-        message.style.marginBottom = '10px';
-
-        const closeButton = document.createElement('button');
-        closeButton.textContent = 'Close';
-        closeButton.className = 'btn'; // Use your existing button style
-        closeButton.addEventListener('click', () => {
-            document.body.removeChild(modal);
-        });
-
-        modal.appendChild(message);
-        modal.appendChild(closeButton);
-        document.body.appendChild(modal);
-    });
-
-</script>
-
+    <div id="rsvp-modal">
+        <p>Please call xxx xxxxxx (xxxxxx) or yyyyyyy (yyyyyy) to confirm your RSVP.</p>
+        <button id="close-rsvp" class="btn">Close</button>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
