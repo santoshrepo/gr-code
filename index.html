@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gender Reveal Invitation</title>
@@ -138,18 +140,19 @@
     z-index: 1000;
     width: 90%;
     max-width: 600px; /* Match main container max-width */
-    height: 50%; /* Allow height to adjust to content */
+    height: auto; /* Allow height to adjust to content */
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Good readable font */
     color: #333; /* Darker text for better contrast */
 }
 
 #game-content {
-    flex-grow: 1; /* Allow content to grow and fill available space */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center; /* Center content within game-content */
     align-items: center;
+    margin-top: 5%; /* Add margin to push content down */
 }
 
 #game-container h2, #game-container p {
@@ -195,13 +198,29 @@
             100% { transform: translateX(0); }
         }
 
+.registry-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+    margin: 0 10px;
+}
+
+.registry-btn:hover {
+    background-color: #e0e0e0;
+}
+
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
     <div class="container" id="invite-container">
-        <h1>WHAT WILL xxxxx AND xxxxxx's<br>SWEET LITTLE BABY BE?</h1>
+        <h1>WHAT WILL SANTOSH AND PRADNYA's<br>SWEET LITTLE BABY BE?</h1>
         <div class="script-text">
             boy <span class="heart"></span> girl
         </div>
@@ -213,10 +232,25 @@
             <p>xxxxxx</p>
             <p>FROM 11AM - 3PM</p>
             <p>Lunch and drinks will be served. Please wear your guess in pink or blue</p>
+
+<p style="margin-top: 30px; text-align: center; font-style: italic; color: #555;">
+    Thinking of a gift? Here are a few ideas:
+    <a href="https://www.amazon.com.au/baby-reg/santosh-sundar-august-2025-westmead/CK2CAS3SWR4G?ref_=cm_sw_r_apin_dp_C7ESZ2CWM043CA7N7A77&language=en_US" target="_blank" style="text-decoration: none; color: #333; margin-left: 10px;">
+        <i class="fa-brands fa-amazon" style="font-size: 1.5em; vertical-align: middle; margin-right: 5px;"></i>
+        Amazon
+    </a>
+    <a href="https://my.babylist.com/santosh-pradnya-registry" target="_blank" style="text-decoration: none; color: #333; margin-left: 10px;">
+        <i class="fa-solid fa-baby" style="font-size: 1.5em; vertical-align: middle; margin-right: 5px;"></i>
+        Baby Registry
+    </a>
+</p>
+
         </div>
         <button id="rsvp-btn" class="btn">RSVP</button>
         <button id="game-button" class="btn">Game</button>
     </div>
+
+
 
     <div id="game-container">
         <h2>Indian Gender Quiz Time!</h2>
@@ -225,7 +259,7 @@
     </div>
 
     <div id="rsvp-modal">
-        <p>Please call xxx xxxxxx (xxxxxx) or yyyyyyy (yyyyyy) to confirm your RSVP.</p>
+        <p>Please call +61 431933607 (Santosh) or +61 420245022 (Pradnya) to confirm your RSVP.</p>
         <button id="close-rsvp" class="btn">Close</button>
     </div>
     <script src="script.js"></script>
