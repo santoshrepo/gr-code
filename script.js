@@ -4,6 +4,61 @@ const gameContent = document.getElementById('game-content');
 const exitGameButton = document.getElementById('exit-game');
 const inviteContainer = document.getElementById('invite-container');
 
+    const rsvpBtn = document.getElementById('rsvp-btn');
+    const rsvpModal = document.getElementById('rsvp-modal');
+    const closeRsvp = document.getElementById('close-rsvp');
+
+rsvpBtn.addEventListener('click', function() {
+        rsvpModal.style.display = 'block';
+
+        // Add confirmation buttons
+        const confirmBtn = document.createElement('button');
+        confirmBtn.textContent = 'Yes, I will attend!';
+        confirmBtn.classList.add('btn');
+
+        const cancelBtn = document.createElement('button');
+        cancelBtn.textContent = 'No, I cannot attend.';
+        cancelBtn.classList.add('btn');
+
+        // Clear existing buttons
+        rsvpModal.innerHTML = '<p>Will you be attending the Gender Reveal?</p>';
+        rsvpModal.appendChild(confirmBtn);
+        rsvpModal.appendChild(cancelBtn);
+
+        confirmBtn.addEventListener('click', function() {
+            // Generate Google Calendar link
+            const eventDetails = {
+                title: 'Santosh and Pradnya\'s Gender Reveal',
+                description: 'Join us to find out the gender of our baby!',
+                location: 'UNIT xx, xxxxxxxxxxx, xxxxxx',
+                startDate: '20231215T110000', // YYYYMMDDTHHMMSS
+                endDate: '20231215T150000',   // YYYYMMDDTHHMMSS
+                timeZone: 'Australia/Sydney' // Replace with your time zone
+            };
+
+            const googleCalendarLink = generateGoogleCalendarLink(eventDetails);
+            window.open(googleCalendarLink, '_blank');
+
+            // Optionally, close the modal after adding to calendar
+            rsvpModal.style.display = 'none';
+        });
+
+        cancelBtn.addEventListener('click', function() {
+            // Close the modal if they are not attending
+            rsvpModal.style.display = 'none';
+        });
+    });
+
+    closeRsvp.addEventListener('click', function() {
+        rsvpModal.style.display = 'none';
+    });
+
+    function generateGoogleCalendarLink(event) {
+        const baseUrl = 'https://www.google.com/calendar/render?action=TEMPLATE';
+        const details = `text=${encodeURIComponent(event.title)}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}&dates=${event.startDate}/${event.endDate}&ctz=${event.timeZone}`;
+        return `${baseUrl}&${details}`;
+    }
+
 function triggerConfetti(options = {}) {
     confetti({
         particleCount: 100,
