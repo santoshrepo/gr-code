@@ -4,84 +4,60 @@ const gameContent = document.getElementById('game-content');
 const exitGameButton = document.getElementById('exit-game');
 const inviteContainer = document.getElementById('invite-container');
 
-const rsvpBtn = document.getElementById('rsvp-btn');
-const rsvpModal = document.getElementById('rsvp-modal');
-const closeRsvp = document.getElementById('close-rsvp');
-
-// Theme colors (using CSS variables if defined, otherwise fallback)
-const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-color') || '#e91e63';
-const primaryDarkColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-dark-color') || '#ad1457';
-const successColor = 'green'; // You can define a CSS variable for this if needed
-const errorColor = 'red';   // You can define a CSS variable for this if needed
-
-// Function to set the game container size based on the invite container
-function setGameContainerSize() {
-    const inviteRect = inviteContainer.getBoundingClientRect();
-    gameContainer.style.width = `${inviteRect.width}px`;
-    gameContainer.style.maxWidth = `${inviteRect.maxWidth}px`; // Keep the max-width
-    gameContainer.style.height = `${inviteRect.height}px`;
-}
+    const rsvpBtn = document.getElementById('rsvp-btn');
+    const rsvpModal = document.getElementById('rsvp-modal');
+    const closeRsvp = document.getElementById('close-rsvp');
 
 rsvpBtn.addEventListener('click', function() {
-    rsvpModal.style.display = 'block';
+        rsvpModal.style.display = 'block';
 
-    // Add confirmation buttons
-    const confirmBtn = document.createElement('button');
-    confirmBtn.textContent = 'Yes, I will attend!';
-    confirmBtn.classList.add('btn');
+        // Add confirmation buttons
+        const confirmBtn = document.createElement('button');
+        confirmBtn.textContent = 'Yes, I will attend!';
+        confirmBtn.classList.add('btn');
 
-    const cancelBtn = document.createElement('button');
-    cancelBtn.textContent = 'No, I cannot attend.';
-    cancelBtn.classList.add('btn');
+        const cancelBtn = document.createElement('button');
+        cancelBtn.textContent = 'No, I cannot attend.';
+        cancelBtn.classList.add('btn');
 
-    // Clear existing buttons
-    rsvpModal.innerHTML = `
-        <p>Will you be attending the Gender Reveal?</p>
-        <div style="margin-top: 10px;">
-            ${confirmBtn.outerHTML}
-            ${cancelBtn.outerHTML}
-        </div>
-        <div id="rsvp-confirmation" style="margin-top: 20px;"></div>
-    `;
+        // Clear existing buttons
+        rsvpModal.innerHTML = '<p>Will you be attending the Gender Reveal?</p>';
+        rsvpModal.appendChild(confirmBtn);
+        rsvpModal.appendChild(cancelBtn);
 
-    const rsvpConfirmation = document.getElementById('rsvp-confirmation');
+        confirmBtn.addEventListener('click', function() {
+            // Generate Google Calendar link
+            const eventDetails = {
+                title: 'Santosh and Pradnya\'s Gender Reveal',
+                description: 'Join us to find out the gender of our baby!',
+                location: 'UNIT xx, xxxxxxxxxxx, xxxxxx',
+                startDate: '20231215T110000', // YYYYMMDDTHHMMSS
+                endDate: '20231215T150000',   // YYYYMMDDTHHMMSS
+                timeZone: 'Australia/Sydney' // Replace with your time zone
+            };
 
-    confirmBtn.addEventListener('click', function() {
-        // Generate Google Calendar link
-        const eventDetails = {
-            title: 'Santosh and Pradnya\'s Gender Reveal',
-            description: 'Join us to find out the gender of our baby!',
-            location: 'UNIT xx, xxxxxxxxxxx, xxxxxx',
-            startDate: '20251215T110000', //⏳YYYYMMDDTHHMMSS
-            endDate: '20251215T150000',    //⏳YYYYMMDDTHHMMSS
-            timeZone: 'Australia/Sydney' // Replace with your time zone
-        };
+            const googleCalendarLink = generateGoogleCalendarLink(eventDetails);
+            window.open(googleCalendarLink, '_blank');
 
-        const googleCalendarLink = generateGoogleCalendarLink(eventDetails);
-        rsvpConfirmation.innerHTML = `
-            <p>Thank you for confirming! The event has been added to your Google Calendar:</p>
-            <a href="${googleCalendarLink}" target="_blank" class="btn">Add to Google Calendar</a>
-        `;
-        // Optionally, don't close immediately
-        // rsvpModal.style.display = 'none';
+            // Optionally, close the modal after adding to calendar
+            rsvpModal.style.display = 'none';
+        });
+
+        cancelBtn.addEventListener('click', function() {
+            // Close the modal if they are not attending
+            rsvpModal.style.display = 'none';
+        });
     });
 
-    cancelBtn.addEventListener('click', function() {
-        rsvpConfirmation.textContent = 'Thank you for letting us know you cannot attend.';
-        // Optionally, don't close immediately
-        // rsvpModal.style.display = 'none';
+    closeRsvp.addEventListener('click', function() {
+        rsvpModal.style.display = 'none';
     });
-});
 
-closeRsvp.addEventListener('click', function() {
-    rsvpModal.style.display = 'none';
-});
-
-function generateGoogleCalendarLink(event) {
-    const baseUrl = 'https://www.google.com/calendar/render?action=TEMPLATE';
-    const details = `text=${encodeURIComponent(event.title)}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}&dates=${event.startDate}/${event.endDate}&ctz=${event.timeZone}`;
-    return `${baseUrl}&${details}`;
-}
+    function generateGoogleCalendarLink(event) {
+        const baseUrl = 'https://www.google.com/calendar/render?action=TEMPLATE';
+        const details = `text=${encodeURIComponent(event.title)}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}&dates=${event.startDate}/${event.endDate}&ctz=${event.timeZone}`;
+        return `${baseUrl}&${details}`;
+    }
 
 function triggerConfetti(options = {}) {
     confetti({
@@ -94,7 +70,6 @@ function triggerConfetti(options = {}) {
 
 gameButton.addEventListener('click', () => {
     triggerConfetti();
-    setGameContainerSize(); // Set the size before displaying
     setTimeout(() => {
         generateRandomGame();
         gameContainer.style.display = 'block';
@@ -141,19 +116,24 @@ function generateRandomGame() {
     let score = 0;
     let questionIndex = 0;
 
+    while (selectedQuestions.length < 5) {
+        const randomIndex = Math.floor(Math.random() * questions.length);
+        if (!selectedQuestions.includes(questions[randomIndex])) {
+            selectedQuestions.push(questions[randomIndex]);
+        }
+    }
+
     function displayQuestion() {
         if (questionIndex < 5) {
             const currentQuestion = selectedQuestions[questionIndex];
 
             gameContent.innerHTML = `
-                <h2>Question ${questionIndex + 1}</h2>
                 <p>${currentQuestion.question}</p>
                 <div style="margin-top: 10px;">
                     <button id="yesButton" class="btn answer-btn">Yes</button>
                     <button id="noButton" class="btn answer-btn">No</button>
                 </div>
                 <p id="answerResult"></p>
-                <p>Score: ${score} out of ${questionIndex}</p>
             `;
 
             const yesButton = document.getElementById('yesButton');
@@ -166,9 +146,9 @@ function generateRandomGame() {
                     score++;
                     triggerConfetti();
                     if(selectedAnswer === "yes"){
-                        yesButton.style.backgroundColor = successColor;
+                        yesButton.style.backgroundColor = 'green';
                     } else {
-                        noButton.style.backgroundColor = successColor;
+                        noButton.style.backgroundColor = 'green';
                     }
 
                     setTimeout(() => {
@@ -182,9 +162,9 @@ function generateRandomGame() {
                         gameContent.classList.remove('shake');
                     }, 500);
                     if(selectedAnswer === "yes"){
-                        yesButton.style.backgroundColor = errorColor;
+                        yesButton.style.backgroundColor = 'red';
                     } else {
-                        noButton.style.backgroundColor = errorColor;
+                        noButton.style.backgroundColor = 'red';
                     }
 
                     setTimeout(() => {
@@ -204,31 +184,44 @@ function generateRandomGame() {
 
         } else {
             const percentageScore = (score / 5) * 100;
-            let celebrationMessageText = "";
-            if (percentageScore < 40) {
-                celebrationMessageText = "Nice try! You got a few right. Thanks for playing!";
-            } else if (percentageScore < 80) {
-                celebrationMessageText = "Good job! You know your Indian baby traditions. Thanks for playing!";
-            } else {
-                celebrationMessageText = "Excellent! You're an expert on Indian baby traditions! Thanks for playing!";
-            }
-
             gameContent.innerHTML = `
                 <h2>Quiz Completed!</h2>
-                <p>Your final score: ${score} out of 5 (${percentageScore}%)</p>
-                <p>${celebrationMessageText}</p>
+                <p>Your score: ${score} out of 5 (${percentageScore}%)</p>
+                <button id="restartButton" class="btn">Restart Quiz</button>
+                <div id="celebration-message" style="margin-top: 20px;"></div>
             `;
-        }
-    }
 
-    // Initialize the game
-    questionIndex = 0;
-    score = 0;
-    selectedQuestions = [];
-    while (selectedQuestions.length < 5) {
-        const randomIndex = Math.floor(Math.random() * questions.length);
-        if (!selectedQuestions.includes(questions[randomIndex])) {
-            selectedQuestions.push(questions[randomIndex]);
+            const restartButton = document.getElementById('restartButton');
+            const celebrationMessage = document.getElementById('celebration-message');
+
+            restartButton.addEventListener('click', () => {
+                triggerConfetti();
+                questionIndex = 0;
+                score = 0;
+                selectedQuestions = [];
+                while (selectedQuestions.length < 5) {
+                    const randomIndex = Math.floor(Math.random() * questions.length);
+                    if (!selectedQuestions.includes(questions[randomIndex])) {
+                        selectedQuestions.push(questions[randomIndex]);
+                    }
+                }
+                displayQuestion();
+            });
+
+            // Baby-themed celebration
+            confetti({
+                particleCount: 200,
+                spread: 100,
+                origin: { y: 0.6 },
+                colors: ['#89CFF0', '#FFB6C1', '#FFFFE0'],
+                shapes: ['star', 'circle'],
+            });
+
+             if (percentageScore < 20) {
+                  celebrationMessage.textContent = "Oops! You might have missed a few. But don't worry, you're still invited to the gender reveal!";
+                } else {
+                  celebrationMessage.textContent = "Congratulations! You're ready for the gender reveal!";
+                }
         }
     }
     displayQuestion();
@@ -246,9 +239,3 @@ closeRsvpButton.addEventListener('click', () => {
     triggerConfetti();
     document.getElementById('rsvp-modal').style.display = 'none';
 });
-
-// Initial call to set the game container size in case the game is loaded directly (though unlikely with this setup)
-setGameContainerSize();
-
-// Optionally, you can add an event listener to handle window resize if the invite container's size might change
-window.addEventListener('resize', setGameContainerSize);
