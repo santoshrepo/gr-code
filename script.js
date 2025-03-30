@@ -30,9 +30,9 @@ rsvpBtn.addEventListener('click', function() {
             const eventDetails = {
                 title: 'Santosh and Pradnya\'s Gender Reveal',
                 description: 'Join us to find out the gender of our baby!',
-                location: 'UNIT xx, xxxxxxxxxxx, xxxxxx',
-                startDate: '20231215T110000', // YYYYMMDDTHHMMSS
-                endDate: '20231215T150000',   // YYYYMMDDTHHMMSS
+                location: 'UNIT 806, 160 Great Western Highway, Westmead, NSW - 2145',
+                startDate: '20250412T110000', // YYYYMMDDTHHMMSS
+                endDate: '20250412T150000',   // YYYYMMDDTHHMMSS
                 timeZone: 'Australia/Sydney' // Replace with your time zone
             };
 
@@ -85,32 +85,132 @@ exitGameButton.addEventListener('click', () => {
 
 function generateRandomGame() {
     const questions = [
-        { question: "Is blue for boys?", answer: "yes" },
-        { question: "Is pink for girls?", answer: "yes" },
-        { question: "Are grandparents happy for a new baby?", answer: "yes" },
-        { question: "Is 'beta' a son?", answer: "yes" },
-        { question: "Is 'beti' a daughter?", answer: "yes" },
-        { question: "Are toy cars for boys?", answer: "yes" },
-        { question: "Are dolls for girls?", answer: "yes" },
-        { question: "Is 'pita' a father?", answer: "yes" },
-        { question: "Is 'ashirwad' a blessing?", answer: "yes" },
-        { question: "Is 'annaprashan' a baby's first food celebration?", answer: "yes" },
-        { question: "Do boys play with trucks?", answer: "yes" },
-        { question: "Do girls play with tea sets?", answer: "yes" },
-        { question: "Is 'nani' a grandmother?", answer: "yes" },
-        { question: "Is 'dada' a grandfather?", answer: "yes" },
-        { question: "Are babies wrapped in blankets?", answer: "yes" },
-        { question: "Do babies drink milk?", answer: "yes" },
-        { question: "Is a rattle a baby toy?", answer: "yes" },
-        { question: "Is 'kajal' used on baby's eyes?", answer: "yes" },
-        { question: "Is 'rakhi' for brothers and sisters?", answer: "yes" },
-        { question: "Is 'krishna' a god associated with children?", answer: "yes" },
-        { question: "Is 'garbhvati' a pregnant woman?", answer: "yes" },
-        { question: "Is 'nakshatra' related to baby naming?", answer: "yes" },
-        { question: "Is 'rakshabandhan' a festival?", answer: "yes" },
-        { question: "Is 'peda' a sweet?", answer: "yes" },
-        { question: "Is 'barfi' a sweet?", answer: "yes" }
-    ];
+  {
+    "question": "Is blue traditionally considered more suitable for...",
+    "options": ["It's neutral", "Boys", "Both equally", "Girls"],
+    "answer": "Boys"
+  },
+  {
+    "question": "Is pink traditionally considered more suitable for...",
+    "options": ["It's neutral", "Girls", "Boys", "Both equally"],
+    "answer": "Girls"
+  },
+  {
+    "question": "How do grandparents typically feel about the arrival of a new baby?",
+    "options": ["It varies greatly", "Overjoyed", "Concerned", "Indifferent"],
+    "answer": "Overjoyed"
+  },
+  {
+    "question": "What is 'beta' in relation to a child?",
+    "options": ["A daughter", "A young relative", "A son", "Neither"],
+    "answer": "A son"
+  },
+  {
+    "question": "What is 'beti' in relation to a child?",
+    "options": ["A young relative", "A son", "A daughter", "Neither"],
+    "answer": "A daughter"
+  },
+  {
+    "question": "Are toy cars generally marketed towards...",
+    "options": ["Neither specifically", "Boys", "Both equally", "Girls"],
+    "answer": "Boys"
+  },
+  {
+    "question": "Are dolls generally marketed towards...",
+    "options": ["Both equally", "Girls", "Boys", "Neither specifically"],
+    "answer": "Girls"
+  },
+  {
+    "question": "What does 'pita' mean in terms of family relationships?",
+    "options": ["Sibling", "Aunt/uncle", "Father", "Mother"],
+    "answer": "Father"
+  },
+  {
+    "question": "What is the meaning of 'ashirwad'?",
+    "options": ["A ritual", "A greeting", "A blessing", "A type of food"],
+    "answer": "A blessing"
+  },
+  {
+    "question": "What is 'annaprashan' celebrating?",
+    "options": ["A religious holiday", "A baby's first food", "A naming ceremony", "A baby's birth"],
+    "answer": "A baby's first food"
+  },
+  {
+    "question": "Are boys more likely to play with...",
+    "options": ["It depends on the child", "Dolls", "Trucks", "Both equally"],
+    "answer": "Trucks"
+  },
+  {
+    "question": "Are girls more likely to play with...",
+    "options": ["It depends on the child", "Toy cars", "Tea sets", "Both equally"],
+    "answer": "Tea sets"
+  },
+  {
+    "question": "What family member is 'nani'?",
+    "options": ["Mother", "Grandmother", "Aunt", "Sister"],
+    "answer": "Grandmother"
+  },
+  {
+    "question": "What family member is 'dada'?",
+    "options": ["Uncle", "Grandfather", "Brother", "Father"],
+    "answer": "Grandfather"
+  },
+  {
+    "question": "Are babies typically wrapped in blankets for...",
+    "options": ["Play", "Comfort", "Warmth", "All of the above"],
+    "answer": "Warmth"
+  },
+  {
+    "question": "What is the primary drink for babies?",
+    "options": ["Juice", "Water", "Milk", "Formula"],
+    "answer": "Milk"
+  },
+  {
+    "question": "What is a rattle primarily used for?",
+    "options": ["A kitchen utensil", "A musical instrument", "A baby toy", "A gardening tool"],
+    "answer": "A baby toy"
+  },
+  {
+    "question": "What is 'kajal' sometimes used for on babies?",
+    "options": ["In their hair", "Around the eyes", "As a medicinal paste", "On the skin"],
+    "answer": "Around the eyes"
+  },
+  {
+    "question": "Who is 'rakhi' traditionally for?",
+    "options": ["Friends", "Brothers and sisters", "Parents", "All family members"],
+    "answer": "Brothers and sisters"
+  },
+  {
+    "question": "Which god is often associated with children in some cultures?",
+    "options": ["Vishnu", "Krishna", "Shiva", "Ganesha"],
+    "answer": "Krishna"
+  },
+  {
+    "question": "What does 'garbhvati' refer to?",
+    "options": ["A midwife", "A pregnant woman", "A newborn baby", "An elderly woman"],
+    "answer": "A pregnant woman"
+  },
+  {
+    "question": "What is 'nakshatra' related to in the context of babies?",
+    "options": ["Feeding", "Naming", "Birth timing", "Sleeping"],
+    "answer": "Naming"
+  },
+  {
+    "question": "What type of event is 'rakshabandhan'?",
+    "options": ["A game", "A religious ceremony", "A festival", "A type of clothing"],
+    "answer": "A festival"
+  },
+  {
+    "question": "What kind of food is 'peda'?",
+    "options": ["A savory dish", "A fruit", "A sweet", "A type of bread"],
+    "answer": "A sweet"
+  },
+  {
+    "question": "What kind of food is 'barfi'?",
+    "options": ["A grain", "A sweet", "A spicy snack", "A type of drink"],
+    "answer": "A sweet"
+  }
+];
 
     let selectedQuestions = [];
     let score = 0;
@@ -127,30 +227,36 @@ function generateRandomGame() {
         if (questionIndex < 5) {
             const currentQuestion = selectedQuestions[questionIndex];
 
+            let optionsHtml = '';
+            currentQuestion.options.forEach(option => {
+                optionsHtml += `<button class="btn answer-btn" data-answer="${option}">${option}</button>`;
+            });
+
             gameContent.innerHTML = `
                 <p>${currentQuestion.question}</p>
                 <div style="margin-top: 10px;">
-                    <button id="yesButton" class="btn answer-btn">Yes</button>
-                    <button id="noButton" class="btn answer-btn">No</button>
+                    ${optionsHtml}
                 </div>
                 <p id="answerResult"></p>
             `;
 
-            const yesButton = document.getElementById('yesButton');
-            const noButton = document.getElementById('noButton');
+            const answerButtons = gameContent.querySelectorAll('.answer-btn');
             const answerResult = document.getElementById('answerResult');
 
             function handleAnswer(selectedAnswer) {
+                answerButtons.forEach(button => {
+                    button.disabled = true;
+                    if (button.dataset.answer === currentQuestion.answer) {
+                        button.style.backgroundColor = 'green';
+                    } else if (button.dataset.answer === selectedAnswer) {
+                        button.style.backgroundColor = 'red';
+                    }
+                });
+
                 if (selectedAnswer === currentQuestion.answer) {
                     answerResult.textContent = 'Correct!';
                     score++;
                     triggerConfetti();
-                    if(selectedAnswer === "yes"){
-                        yesButton.style.backgroundColor = 'green';
-                    } else {
-                        noButton.style.backgroundColor = 'green';
-                    }
-
                     setTimeout(() => {
                         questionIndex++;
                         displayQuestion();
@@ -161,12 +267,6 @@ function generateRandomGame() {
                     setTimeout(() => {
                         gameContent.classList.remove('shake');
                     }, 500);
-                    if(selectedAnswer === "yes"){
-                        yesButton.style.backgroundColor = 'red';
-                    } else {
-                        noButton.style.backgroundColor = 'red';
-                    }
-
                     setTimeout(() => {
                         questionIndex++;
                         displayQuestion();
@@ -174,12 +274,10 @@ function generateRandomGame() {
                 }
             }
 
-            yesButton.addEventListener('click', () => {
-                handleAnswer('yes');
-            });
-
-            noButton.addEventListener('click', () => {
-                handleAnswer('no');
+            answerButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    handleAnswer(button.dataset.answer);
+                });
             });
 
         } else {
@@ -217,11 +315,11 @@ function generateRandomGame() {
                 shapes: ['star', 'circle'],
             });
 
-             if (percentageScore < 20) {
-                  celebrationMessage.textContent = "Oops! You might have missed a few. But don't worry, you're still invited to the gender reveal!";
-                } else {
-                  celebrationMessage.textContent = "Congratulations! You're ready for the gender reveal!";
-                }
+            if (percentageScore < 60) {
+                celebrationMessage.textContent = "Oops! You might have missed a few. But don't worry, you're still invited to the gender reveal!";
+            } else {
+                celebrationMessage.textContent = "Congratulations! You're ready for the gender reveal!";
+            }
         }
     }
     displayQuestion();
